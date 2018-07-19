@@ -1,1 +1,4 @@
 Welcome, <%= current_user.username %>
+<% @categories.each do |category| %>
+<% category.title %>
+<%end%>

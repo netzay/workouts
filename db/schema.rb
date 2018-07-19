@@ -14,7 +14,7 @@
 ActiveRecord::Schema.define(version: 3) do
 
   create_table "categories", force: :cascade do |t|
-    t.string  "type"
+    t.string  "title"
     t.integer "user_id"
   end
 
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 3) do
   end
 
   create_table "workouts", force: :cascade do |t|
-    t.string  "name"
+    t.string  "title"
     t.string  "link"
     t.integer "category_id"
   end

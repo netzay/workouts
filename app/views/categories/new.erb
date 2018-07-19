@@ -1,9 +1,22 @@
-<form action="/add_category"method="POST">
+<form action="/category" method="POST">
 
-  <label> Name </label>
+	<label> Category Title: </label>
 
+	<input type="text" name="category[title]" id="category_title">
+	<input type = "submit" value="Add Category">
+	<br></br>
 
-    <input type = "submit" value="Add Category">
-
+	<label>Add a new workout:</label>
+	<br></br>
+	<label> Title:</label>
+	<input  type="text" name="workout[title]" id="workout_title"></input>
+	<div class="control">
+		<label for="url"> Link:</label>
+		<input type="url" name="url" id="url"
+		placeholder="https://example.com"
+		pattern="https://.*" size="20"  />
+	</div>
+	<input type="submit" value="Add Workout">
+</form>
 
 </form>

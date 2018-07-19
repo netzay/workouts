@@ -1,0 +1,7 @@
+<h1><%=@category.title%></h1>
+<h4>Workouts:</h4>
+<ul>
+  <%@category.workouts.each do |workout|%>
+  <li><%=workout.title%></li>
+  <%end%>
+</ul>
