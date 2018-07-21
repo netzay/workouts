@@ -1,7 +1,8 @@
-<h1><%=@category.title%></h1>
-<h4>Workouts:</h4>
-<ul>
+
+  <h3><%=@category.title%></h3>
+
   <%@category.workouts.each do |workout|%>
-  <li><%=workout.title%></li>
+    <a><%=workout.title%></a></br>
+    <a><%=workout.link%></a></br>
+    </a></li>
   <%end%>
-</ul>

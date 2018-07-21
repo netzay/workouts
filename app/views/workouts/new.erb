@@ -1,0 +1,28 @@
+<h1>Add a new workout</h1>
+<form action="/workouts" method="POST">
+  <label>Title:</label>
+ 
+  <br></br>
+ 
+  <input type="text" name="workout[title]" id="workout_title">
+ 
+  <br></br>
+ 
+  <label>Add to an exisiting category:</label>
+ 
+  <br></br>
+ 
+ <%@categories.each do |category|%>
+    <input type="checkbox" name="workout[category_id]" id="<%=cateogry.id%>" value="<%=category.id%>"><%=category.title%></input>
+  <%end%>
+ 
+  <br></br>
+ 
+ 
+    <label>or, create a new category:</label>
+    <br></br>
+    <label>Title:</label>
+      <input  type="text" name="category[title]" id="category_title"></input>
+    <br></br>
+  <input type="submit" value="Add workout">
+</form>

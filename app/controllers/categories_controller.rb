@@ -18,20 +18,29 @@ class CategoriesController < ApplicationController
 		end
 	end
 
-	post '/category' do
+	post '/categories' do
 		@category = Category.create(params[:category])
 		if !params[:workout][:title].empty?
 			@category.workouts << Workout.create(title: params[:workout][:title])
 		end
 		@category.save
-		redirect to "categories/#{category.id}"
+		redirect to "/categories/#{@category.id}"
 	end
 
-	get '/categories/:id' do
-		@category = Category.find(params[:id])
-		erb :'/categories/show'
+	get '/categories/index' do
+		if session[:user_id]
+		@categories = Category.all
+		erb :'/categories/index'
 	end
 
+	end
+
+	get '/category/:id' do
+		if session[:user_id]
+    	@category = Category.find_by_id(params[:id])
+    	erb :'/categories/show'
+  	end
+  end
 
 	
 
