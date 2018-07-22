@@ -6,8 +6,8 @@
 	<br></br>
 	 <label> Add to existing category: </label>
     <%if Category != nil %>
-    <%Category.all.each do |category|%>
-    <input type="radio" name="workout[category_id]" id="<%= category.id%>" value="<%=category.id%>" ><%=category.title%></input>
+    <%@categories.all.each do |category|%>
+    <input type="checkbox" name="workout[category_id]" id="<%=category.id%>" value="<%=category.id%>" ><%=category.title%></input>
   <%end%>
     <%end%>
 

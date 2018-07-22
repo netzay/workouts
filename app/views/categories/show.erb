@@ -4,6 +4,10 @@
   <%@category.workouts.each do |workout|%>
     <h4><%=workout.title%>: </h4>
     <a href><%=workout.link%></a></br>
-      <a href="/workouts/<%=workout.id%>"> Edit Workout </a>
+      <a href="/workouts/<%=workout.id%>/edit"> Edit Workout </a>
 
   <%end%>
+  <form action="/categories/<%= @category.id %>" method="post">
+  <input id="hidden" type="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete">
+

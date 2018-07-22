@@ -1,3 +1,5 @@
-<p><%= @workout.title %></p><br>
-<p><%= @workout.link %></p><br>
+<h3>Category: <%=@workout.category.title %></h3>
+<h4>Title: <%= @workout.title %></h4>
+<h4>Link: <%= @workout.link %></h4>
+ <a href="/workouts/<%=@workout.id%>/edit"> Edit Workout </a>
 

@@ -1,6 +1,12 @@
 class WorkoutsController < ApplicationController
 
-	get '/workouts/new' do
+	get 'workouts' do
+    @workouts = Workout.all
+    erb :'/workouts/show'
+  end
+
+
+  get '/workouts/new' do
 		if logged_in?
 			@categories = Category.all 
 			erb :'/workouts/new'
@@ -12,15 +18,16 @@ class WorkoutsController < ApplicationController
 
 	post '/workouts' do 
     	@workout = Workout.create(params[:workout])
-    	if !params[:workout][:title].empty? && !params[:workout][:link].empty?
+    	if !params[:category][:title].empty?
       		@workout.category = Category.create(title: params[:category][:title])
     	end
     		@workout.save
 			redirect to "/workouts/#{@workout.id}"
   		end
   
+
   post '/workouts/:id' do 
-   @workout = Workout.find(params[:id])
+    @workout = Workout.find(params[:id])
     @workout.update(params[:workout])
     if !params[:category][:title].empty?
       @workout.category = Category.create(title: params[:category][:title])
@@ -29,10 +36,11 @@ class WorkoutsController < ApplicationController
     redirect to "/workouts/#{@workout.id}"
   end
 
+
 	get '/workouts/:id' do
 		if session[:user_id]
     		@workout = Workout.find(params[:id])
-			erb :'/workouts/edit'
+			erb :'/workouts/show'
 
 		else
 			redirect to '/login'
@@ -40,23 +48,20 @@ class WorkoutsController < ApplicationController
   	end
 
 
-  	patch '/workouts/:id' do
+  patch '/workouts/:id' do
 		if session[:user_id]
   			redirect to "/workouts/#{params[:id]}/edit"
   		else
     		@workout = Workout.find_by_id(params[:id])
     		@workout.save
-			erb :'/workout/show'
+			erb :'/workouts/show'
 		end
-  	end
+  end
 
 	get '/workouts/:id/edit' do
 		if session[:user_id]
     		@workout = Workout.find(params[:id])
-    		@category = Category.find(params[:id])
-    		@workout.category.save
-			erb :'/categories/show'
-
+			erb :'/workouts/edit'
 		else
 			redirect to '/login'
   		end
@@ -64,7 +69,7 @@ class WorkoutsController < ApplicationController
 
   	delete '/workouts/:id' do
 		if session[:user_id]
-    		@workout = Workout.delete(params[:id])
+    	@workout = Workout.delete(params[:id])
       redirect to '/'
     	end
     end
