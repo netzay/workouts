@@ -5,13 +5,3 @@
   </ul>
 <% end %>
 
-<html>
-  <h1><a href ="/categories/<%=@category.slug%>"><%=@category.title%></a></h1>
-  
-  <%@category.workouts.each do |workout|%>
-    <li><a href="/workouts/<%=workout.slug%>"><%=workout.title%></a></br>
-    <li><a href="/workouts/<%=workout.slug%>"><%=workout.link%></a></br>
-
-
-    </a></li>
-  <%end%>

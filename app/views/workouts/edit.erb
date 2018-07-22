@@ -15,9 +15,9 @@
   <label> Change Category: </label>
     <%Category.all.each do |category|%>
     <input type="radio" name="workout[category_id]" id="<%= category.id%>" value="<%=category.id%>" <%='checked' if @workout.category==category %> > <%=category.title%></input>
-  <%end%>
+  <%end%></br>
     <input type="submit" value="Update">
-<form action="/workouts/<%= @workout.id %>/delete" method="post">
+
   <input id="hidden" type="hidden" name="_method" value="delete">
   <input type="submit" value="Delete">
 </form>

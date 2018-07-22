@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
 	 get '/users/:id' do
     if !logged_in?
-      redirect '/categories'
+      redirect '/workouts'
     end
   end
 
@@ -20,7 +20,7 @@ class UsersController < ApplicationController
   	else
   		@user = User.create(username: params[:username], password: params[:password])
   		session[:user_id] = @user.id
-  		redirect to '/categories'
+  		redirect to '/workouts'
   	end
   end
   
@@ -28,7 +28,7 @@ class UsersController < ApplicationController
     if !session[:user_id]
       erb :'users/login'
     else
-      redirect to '/categories'
+      redirect to '/workouts'
     end
   end
   
@@ -38,7 +38,7 @@ class UsersController < ApplicationController
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
       current_user = session[:user_id]
-        redirect to '/categories'
+        redirect to '/workouts'
     end
   end
   
