@@ -1,3 +1,6 @@
-<h1><%=@workout.title%></h1>
-<h1><%=@workout.link%></h1>
-<h2><%=@workout.category.title%></h2>
+<p><%= @category.title %></p><br>
+<p><%= @workout.title %></p><br>
+<form action="/workouts/<%= @workout.id %>/delete" method="post">
+  <input id="hidden" type="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete">
+</form>

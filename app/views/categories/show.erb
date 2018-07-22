@@ -2,7 +2,8 @@
   <h3><%=@category.title%></h3>
 
   <%@category.workouts.each do |workout|%>
-    <a><%=workout.title%></a></br>
-    <a><%=workout.link%></a></br>
-    </a></li>
+    <h4><%=workout.title%>: </h4>
+    <a href><%=workout.link%></a></br>
+      <a href="/workouts/<%=workout.id%>"> Edit Workout </a>
+
   <%end%>
