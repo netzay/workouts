@@ -1,8 +1,15 @@
 class UsersController < ApplicationController
 
 	 get '/users/:id' do
-    if !session[:user_id]
-      redirect '/login'
+    if !logged_in?
+      redirect to '/categories/index'
+    end
+
+    @user = User.find(params[:id])
+    if !@user.nil? && @user == current_user
+      erb :'/users/show'
+    else
+      redirect to '/categories/index'
     end
   end
 
@@ -25,22 +32,21 @@ class UsersController < ApplicationController
   end
   
   get '/login' do
-    if !session[:user_id]
+    if !logged_in?
       erb :'/users/login'
     else
-      redirect to '/workouts/new'
+      redirect to '/categories/index'
     end
   end
   
   post '/login' do
-    @user = User.find_by(:username => params[:username])
-    
-    if @user && @user.authenticate(params[:password])
-      session[:user_id] = @user.id
+    user = User.find_by(:username => params[:username])
+    if user && user.authenticate(params[:password])
+      session[:user_id] = user.id
       current_user = session[:user_id]
-        redirect to '/workouts/new'
+      redirect to '/workouts/new'
     else
-      redirect to '/login'
+      redirect to '/signup'
     end
   end
   
