@@ -1,10 +1,10 @@
 <form action="/workouts" method="POST">
 
-  <label> Category Title: </label>
+  <label> Add New Category: </label>
 
   <input type="text" name="category[title]" id="category_title">
   <br></br>
-   <label> Add to existing category: </label>
+   <label> Choose from an exisiting category: </label>
     <%if Category != nil %>
     <%Category.all.each do |category|%>
     <input type="radio" name="workout[category_id]" id="<%= category.id%>" value="<%=category.id%>" ><%=category.title%></input>
@@ -15,7 +15,7 @@
  
   <br></br>
 
-  <label>Add a new workout:</label>
+  <label>Add workout:</label>
   <br></br>
   <label> Title:</label>
   <input  type="text" name="workout[title]" id="workout_title"></input>

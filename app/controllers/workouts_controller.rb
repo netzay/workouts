@@ -17,7 +17,7 @@ class WorkoutsController < ApplicationController
 	post '/workouts' do 
   	@workout = Workout.create(params[:workout])
 
-     if !params[:category][:title].empty? 
+     if Category.valid_entry(params)
     		@workout.category = Category.create(title: params[:category][:title])
         @workout.save
         @workout.category.user_id = session[:user_id]
@@ -39,7 +39,7 @@ class WorkoutsController < ApplicationController
   post '/workouts/:id' do 
     @workout = Workout.find(params[:id])
     @workout.update(params[:workout])
-    if !params[:category][:title].empty?
+    if Category.valid_entry(params)
       @workout.category = Category.create(title: params[:category][:title])
     end
     @workout.save

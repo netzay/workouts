@@ -13,7 +13,7 @@ class CategoriesController < ApplicationController
    	@category = Category.create(params[:category])
 
 
-   	if !params[:workout][:title].empty? && !params[:workout][:link].empty?
+  	if Workout.valid_entry?(params)
     	@category.workouts << Workout.create(title: params[:workout][:title], link: params[:workout][:link])
     end
     	@category.save
@@ -40,19 +40,19 @@ class CategoriesController < ApplicationController
 		if session[:user_id]
     	@category = Category.find(params[:id])
 	    erb :'/categories/show'
-  	end
-  end
-
-  post '/categories/:id' do
-  	@category = Category.find(params[:id])
-  	@category.update(params[:category])
-  		if !params[:workout][:title].empty? && !params[:workout][:title].empty? 
-  			@category.workouts << Workout.create(title: params[:workout][:title], link: params[:link][:title])
-  		else
-  			redirect to "/categories/#{@category.id}/edit?error=invalid entry"
   		end
-    	redirect to '/categories#{@category.id}'
-    end
+  	end
+
+  	post '/categories/:id' do
+  		@category = Category.find(params[:id])
+  		@category.update(params[:category])
+  			if Workout.valid_entry?(params)
+  				@category.workouts << Workout.create(title: params[:workout][:title], link: params[:link][:title])
+  			else
+  				redirect to "/categories/#{@category.id}/edit?error=invalid entry"
+  			end
+    		redirect to '/categories#{@category.id}'
+    	end
     
 
   
