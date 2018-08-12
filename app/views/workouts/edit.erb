@@ -1,18 +1,15 @@
 <h3>Edit:</h3>
 
 <form action="/workouts/<%=@workout.id %>" method="POST">
-  <label> Category </label>
-  <input type="text" name="title" value="<%=@category.title %>"> </br>
+
   <label> Workout:</label>
   <input type="text" name="title" value="<%=@workout.title %>"> </br>
 
   <div class="control">
     <label for="url"> Link:</label>
-
-          <input type="text" name="link" value="<%=@workout.link%>"> </br>
+ <input type="text" name="link" value="<%=@workout.link%>"> </br>
   </div>
-   <label> Category </label>
-  <input type="text" name="title" value="<%=@category.title %>"> </br>
+  
 
 
   <label> Change Category: </label>
