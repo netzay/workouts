@@ -1,7 +1,0 @@
-<p> Here are your Categories, <%= @user.username %>
-<% @user.categories.each do |category| %>
-  <ul>
-    <li><a href="/categories/<%=category.id%>"><%= category.title %></a></li>
-  </ul>
-<% end %>
-

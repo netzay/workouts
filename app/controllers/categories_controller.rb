@@ -10,15 +10,13 @@ class CategoriesController < ApplicationController
 	end
 
  	post '/categories' do 
-   	@category = Category.create(params[:category])
-
-
-  	if Workout.valid_entry?(params)
-    	@category.workouts << Workout.create(title: params[:workout][:title], link: params[:workout][:link])
-    end
-    	@category.save
-    	redirect to "categories/#{@category.id}"
-    end	
+   		@category = Category.create(params[:category])
+		if Workout.valid_entry?(params)
+    		@category.workouts << Workout.create(title: params[:workout][:title], link: params[:workout][:link])
+    	end
+    		@category.save
+    		redirect to "categories/#{@category.id}"
+    	end	
 
 	get '/categories/index' do
 		if session[:user_id]
@@ -37,9 +35,11 @@ class CategoriesController < ApplicationController
 	end
 
 	get '/categories/:id' do
-		if session[:user_id]
-    	@category = Category.find(params[:id])
-	    erb :'/categories/show'
+		@user = current_user
+		if logged_in?
+    		@category = Category.find(params[:id])
+    		@workout = Workout.find_by(params[:id])	
+		    erb :'/categories/show'
   		end
   	end
 
@@ -51,18 +51,16 @@ class CategoriesController < ApplicationController
   			else
   				redirect to "/categories/#{@category.id}/edit?error=invalid entry"
   			end
-    		redirect to '/categories#{@category.id}'
+    		redirect to '/categories/index'
     	end
     
 
   
-  	delete '/categories/:id' do
-		if session[:user_id]
+  	 delete '/categories/:id' do
+		if logged_in?
     		@category = Category.delete(params[:id])
-			redirect to '/'
+			redirect to '/categories/index'
     	end
     end
-
 	
 end
-

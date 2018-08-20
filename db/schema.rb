@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 3) do
     t.string  "title"
     t.string  "link"
     t.integer "category_id"
+    t.integer "user_id"
   end
 
 end

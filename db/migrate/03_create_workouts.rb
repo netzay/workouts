@@ -4,6 +4,8 @@ class CreateWorkouts < ActiveRecord::Migration
       t.string :title
       t.string :link
       t.integer :category_id
+      t.integer :user_id
+
     end
   end
 end

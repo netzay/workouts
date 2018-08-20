@@ -1,4 +1,3 @@
-
   <h3><%=@category.title%></h3>
 
   <%@category.workouts.each do |workout|%>
@@ -11,3 +10,4 @@
 <form action="/categories/<%= @category.id %>" method="post">
   <input id="hidden" type="hidden" name="_method" value="delete">
   <input type="submit" value="Delete Category">
+
