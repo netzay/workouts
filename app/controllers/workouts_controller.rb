@@ -61,7 +61,7 @@ class WorkoutsController < ApplicationController
   end
 
   get '/workouts/:id/edit' do
-    if logged_in?
+    redirect_if_not_logged_in
       @user = current_user
       @workout = Workout.find_by_id(params[:id])
       if session[:user_id] == @workout.user_id
@@ -69,9 +69,6 @@ class WorkoutsController < ApplicationController
       else
         redirect to '/categories'
       end
-    else
-      redirect '/login'
-    end
   end
 
   delete '/workouts/:id/delete' do
