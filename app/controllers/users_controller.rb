@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-
-	 get '/users/:id' do
+  
+  get '/users/:id' do
     if logged_in?
       redirect to '/categories/index'
     end
