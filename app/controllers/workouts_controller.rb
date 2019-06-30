@@ -6,7 +6,7 @@ class WorkoutsController < ApplicationController
   end
 
   get '/workouts/new' do
-  if logged_in?
+    if logged_in?
       @categories = Category.all 
       erb :'/workouts/new'
     else
@@ -14,22 +14,21 @@ class WorkoutsController < ApplicationController
     end
   end
 
- post '/workouts' do 
-      @user = current_user
-     if logged_in? && Category.valid_entry(params)
-        @workout = Workout.create(params[:workout])
-        @workout.category = Category.create(title: params[:category][:title])
-        @user.workouts << @workout
-        redirect to "/workouts/#{@workout.id}"
+  post '/workouts' do 
+    @user = current_user
+    if logged_in? && Category.valid_entry(params)
+      @workout = Workout.create(params[:workout])
+      @workout.category = Category.create(title: params[:category][:title])
+      @user.workouts << @workout
+      redirect to "/workouts/#{@workout.id}"
     else
       redirect "/login"
     end
   end
 
-  
   get '/workouts/:id' do
-      @user = current_user
-      @workout = Workout.find(params[:id])
+    @user = current_user
+    @workout = Workout.find(params[:id])
     if session[:user_id] == @workout.user_id
        erb :'/workouts/show'
     else
@@ -38,13 +37,13 @@ class WorkoutsController < ApplicationController
   end
   
   post '/workouts/:id' do 
-      @user = current_user
-      @workout = Workout.find(params[:id])
+    @user = current_user
+    @workout = Workout.find(params[:id])
     if session[:user_id] == @workout.user_id 
       @workout.update(params[:workout])
     end
-    @workout.save
-    redirect to "/workouts/#{@workout.id}"
+      @workout.save
+      redirect to "/workouts/#{@workout.id}"
   end
 
 
@@ -62,13 +61,13 @@ class WorkoutsController < ApplicationController
 
   get '/workouts/:id/edit' do
     redirect_if_not_logged_in
-      @user = current_user
-      @workout = Workout.find_by_id(params[:id])
-      if session[:user_id] == @workout.user_id
-        erb :'/workouts/edit'
-      else
-        redirect to '/categories'
-      end
+    @user = current_user
+    @workout = Workout.find_by_id(params[:id])
+    if session[:user_id] == @workout.user_id
+      erb :'/workouts/edit'
+    else
+      redirect to '/categories'
+    end
   end
 
   delete '/workouts/:id/delete' do
@@ -82,4 +81,4 @@ class WorkoutsController < ApplicationController
       redirect "/workouts/#{@workout.id}"
       end
     end
-end
+  end
